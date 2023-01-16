@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkellyHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
     public Animator animator;
     public int maxHealth = 100;
     int currentHealth;
     public bool dead = false;
+    public float deathspeed = 3f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -25,18 +26,11 @@ public class SkellyHealth : MonoBehaviour
     void Die()
     {
         animator.SetBool("IsDead", true);
-        //GetComponent<Collider2D>().enabled = false;
-        Invoke("Dissapear", 3f);//disable enemy
+        Invoke("Dissapear", deathspeed);//disable enemy
     }
     void Dissapear()
     {
         gameObject.SetActive(false);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }
