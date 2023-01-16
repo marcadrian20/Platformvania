@@ -26,12 +26,12 @@ public class SkellyHealth : MonoBehaviour
     {
         animator.SetBool("IsDead", true);
         //GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
         Invoke("Dissapear", 3f);//disable enemy
     }
     void Dissapear()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
