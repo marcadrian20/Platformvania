@@ -2,35 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class SkellyAttack : MonoBehaviour
 {
     public Animator animator;
     public Transform attackpoint;
     public float attackRange = 0.5f;
-    public LayerMask enemylayers;
+    public LayerMask PlayerLayer;
     public int attackDamage = 40;
     public float attackRate = 3f;
     float nextAttackTime = 0f;
-
     void Update()
     {
+        /*if (Input.GetButtonDown("Fire1"))
+        {
+            Invoke("Attack", 0.5f);
+        }*/
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
         if (Time.time >= nextAttackTime)
-            if (Input.GetButtonDown("Fire1"))
-            {
-
-                animator.SetTrigger("Attack");
-                Invoke("Attack", 0.5f);
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+        {
+            if (collision.CompareTag("Player"))
+                Attack();
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
     }
     void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, enemylayers);
+        animator.SetTrigger("Attack");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, PlayerLayer);
         //Damage em
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Health>().TakeDamage(attackDamage);
         }
+
     }
     void OnDrawGizmosSelected()
     {
@@ -38,4 +44,3 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(attackpoint.position, attackRange);
     }
 }
-///Mark made <3
