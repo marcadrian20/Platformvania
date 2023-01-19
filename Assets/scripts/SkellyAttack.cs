@@ -20,19 +20,19 @@ public class SkellyAttack : MonoBehaviour
     //}
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         if (Time.time >= nextAttackTime)
         {
             if (collision.gameObject)
             {
-                Attack();
+                animator.SetTrigger("Attack");
+                InvokeRepeating("Attack", .7f, 1f);
             }
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
     void Attack()
     {
-        animator.SetTrigger("Attack");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, PlayerLayer);
         //Damage em
         foreach (Collider2D enemy in hitEnemies)

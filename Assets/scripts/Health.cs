@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
-            dead = true;
+            dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
         }
     }
     void Die()
@@ -30,7 +30,8 @@ public class Health : MonoBehaviour
     }
     void Dissapear()
     {
-        gameObject.SetActive(false);
-
+        gameObject.SetActive(false);// skelly for some fucking reason loves to snipe attack you beyond the grave
+        //Destroy(gameObject);///so destroy works for now ig
     }
 }
+//->Mark was here @furculita_in_priza
