@@ -113,8 +113,8 @@ TextureImporter:
         width: 156
         height: 201
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 123}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -134,7 +134,7 @@ TextureImporter:
         width: 96
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +155,7 @@ TextureImporter:
         width: 160
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +176,7 @@ TextureImporter:
         width: 160
         height: 78
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,8 +197,8 @@ TextureImporter:
         width: 160
         height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 96, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -218,7 +218,7 @@ TextureImporter:
         width: 126
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,8 +239,8 @@ TextureImporter:
         width: 154
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 77, y: 0, z: 0, w: 74}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -260,7 +260,7 @@ TextureImporter:
         width: 26
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles_1: 98022778
-      Tiles_0: -2067997439
-      Tiles_5: -1700204591
-      Tiles_6: -83957454
-      Tiles_7: -789580628
-      Tiles_4: -1565463800
-      Tiles_3: 256257003
-      Tiles_2: -805129357
+      Tiles_1: -2067997439
+      Tiles_0: 98022778
+      Tiles_5: -805129357
+      Tiles_6: 256257003
+      Tiles_7: -1565463800
+      Tiles_4: -1700204591
+      Tiles_3: -83957454
+      Tiles_2: -789580628
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
