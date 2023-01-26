@@ -11,19 +11,22 @@ public class SkellyAttack : MonoBehaviour
     public int attackDamage = 40;
     public float attackRate = 3f;
     float nextAttackTime = 0f;
-    void Update()
+    //void Update()
+    //{
+    /*if (Input.GetButtonDown("Fire1"))
     {
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            Invoke("Attack", 0.5f);
-        }*/
-    }
+        Invoke("Attack", 0.5f);
+    }*/
+    //}
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Hit");
         if (Time.time >= nextAttackTime)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.gameObject)
+            {
                 Attack();
+            }
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
