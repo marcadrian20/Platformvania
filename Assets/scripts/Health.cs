@@ -9,9 +9,12 @@ public class Health : MonoBehaviour
     int currentHealth;
     public bool dead = false;
     public float deathspeed = 3f;
+
+    public HealthBar healthBar;
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
     public void TakeDamage(int damage)
     {
@@ -22,6 +25,7 @@ public class Health : MonoBehaviour
             Die();
             dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
         }
+        healthBar.SetHealth(currentHealth);
     }
     void Die()
     {
