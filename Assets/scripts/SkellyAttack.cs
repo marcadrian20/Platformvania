@@ -26,11 +26,13 @@ public class SkellyAttack : MonoBehaviour
             if (collision.gameObject)
             {
                 animator.SetTrigger("Attack");
-                InvokeRepeating("Attack", .7f, 1f);
+                //InvokeRepeating("Attack", .7f, 1f);temp fix for continous attack
+                Attack();
             }
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
+
     void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, PlayerLayer);

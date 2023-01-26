@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth -= (Random.Range(-10, 10) + damage);
         if (!dead) animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
         {
