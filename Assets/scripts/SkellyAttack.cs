@@ -26,8 +26,8 @@ public class SkellyAttack : MonoBehaviour
             if (collision.gameObject)
             {
                 animator.SetTrigger("Attack");
-                //InvokeRepeating("Attack", .7f, 1f);temp fix for continous attack
-                Attack();
+                InvokeRepeating("Attack", .7f, 1f);//temp fix for continous attack
+                //Attack();
             }
             nextAttackTime = Time.time + 1f / attackRate;
         }
