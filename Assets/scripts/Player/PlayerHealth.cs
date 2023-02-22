@@ -8,7 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public Animator animator;
     public int maxHealth = 100;
     int currentHealth;
-    public UnityEvent onDeath;
+    public delegate void DeadAction();
+    public static event DeadAction onDeath;
     public bool dead = false;
     public float deathspeed = 3f;
     [Header("Components")]
@@ -20,8 +21,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        if (onDeath == null)
-            onDeath = new UnityEvent();
         currentHealth = maxHealth;
         HealthBar.SetMaxHealth(maxHealth);
 
@@ -66,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         animator.SetBool("IsDead", true);
-        //onDeath.Invoke();
+        onDeath();
         // GetComponent < CharacterController2D >().enabled = false; //never do this its plain stupid im retarded
         //Invoke("Dissapear", deathspeed);//disable enemy
     }

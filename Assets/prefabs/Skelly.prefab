@@ -271,6 +271,7 @@ MonoBehaviour:
   animator: {fileID: 8436409454390566167}
   maxHealth: 100
   dead: 0
+  components: []
   deathspeed: 3
 --- !u!61 &8436409454390566166
 BoxCollider2D:
