@@ -26,7 +26,7 @@ public class GameOver : MonoBehaviour
     }
     private IEnumerator GameOverSequence()
     {
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 0f;
         GameOverUI.SetActive(true);
     }

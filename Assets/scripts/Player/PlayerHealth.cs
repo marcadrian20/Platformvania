@@ -66,13 +66,12 @@ public class PlayerHealth : MonoBehaviour
     {
         animator.SetBool("IsDead", true);
         onDeath();
-        // GetComponent < CharacterController2D >().enabled = false; //never do this its plain stupid im retarded
+        GetComponent <CharacterController2D>().enabled = false; //never do this its plain stupid im retarded
         //Invoke("Dissapear", deathspeed);//disable enemy
     }
     void Dissapear()
     {
-        gameObject.SetActive(false);// skelly for some fucking reason loves to snipe attack you beyond the grave
-        //Destroy(gameObject);///so destroy works for now ig
+        gameObject.SetActive(false);
     }
     /*private IEnumerator Invunerability()
     {

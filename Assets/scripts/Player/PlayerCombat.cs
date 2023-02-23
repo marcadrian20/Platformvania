@@ -35,6 +35,8 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
+        //if (Input.GetButtonDown("Fire1"))
+            //BuffableEntity.AddBuff(SpeedBuff.InitializeBuff(this.gameObject));
     }
     void Attack()
     {

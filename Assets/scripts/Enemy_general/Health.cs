@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
     void Die()
     {
         animator.SetBool("IsDead", true);
-        //Invoke("Dissapear", deathspeed);//disable enemy
+        Invoke("Dissapear", deathspeed);//disable enemy
     }
     void Dissapear()
     {
