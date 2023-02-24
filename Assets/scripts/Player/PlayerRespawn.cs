@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class PlayerRespawn : MonoBehaviour
 {
     //[SerializeField] private AudioClip checkpoint;
-    private Transform currentCheckpoint;
+    public Transform currentCheckpoint;
     private PlayerHealth playerHealth;
   
 
@@ -26,6 +26,7 @@ public class PlayerRespawn : MonoBehaviour
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
             currentCheckpoint = collision.transform;
+            playerHealth.AddHealth(40);
             //playerHealth.onDeath += Respawn;
             //SoundManager.instance.PlaySound(checkpoint);
             //collision.GetComponent<Collider2D>().enabled = false;

@@ -10,7 +10,7 @@ public class TimedSpeedBuff : TimedBuff
         //Getting MovementComponent, replace with your own implementation
         _movementComponent = obj.GetComponent<PlayerMovement>();
     }
-    
+
     protected override void ApplyEffect()
     {
         //Add speed increase to MovementComponent

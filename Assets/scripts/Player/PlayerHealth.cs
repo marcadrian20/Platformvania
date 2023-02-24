@@ -27,11 +27,11 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        //if (invulnerable) return;
+        if (invulnerable) return;
         currentHealth -= (Random.Range(-10, 10) + damage);
         if (!dead)
         {
-            //StartCoroutine(Invunerability());
+            StartCoroutine(Invunerability());
             animator.SetTrigger("Hurt");
         }
         if (currentHealth <= 0)
@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
         animator.ResetTrigger("IsDead");
         HealthBar.SetHealth(currentHealth);
         animator.Play("Player_idle");
-        //StartCoroutine(Invunerability());
+        StartCoroutine(Invunerability());
 
         //Activate all attached component classes
         foreach (Behaviour component in components)
@@ -64,23 +64,23 @@ public class PlayerHealth : MonoBehaviour
     }
     void Die()
     {
+        GetComponent<CharacterController2D>().enabled = false; //never do this its plain stupid im retarded
         animator.SetBool("IsDead", true);
         onDeath();
-        GetComponent <CharacterController2D>().enabled = false; //never do this its plain stupid im retarded
         //Invoke("Dissapear", deathspeed);//disable enemy
     }
     void Dissapear()
     {
         gameObject.SetActive(false);
     }
-    /*private IEnumerator Invunerability()
+    private IEnumerator Invunerability()
     {
         invulnerable = true;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+        yield return new WaitForSecondsRealtime(1.5f);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         invulnerable = false;
-    }*/
+    }
     void Update()
     {
         if (Input.GetButtonDown("Crouch"))

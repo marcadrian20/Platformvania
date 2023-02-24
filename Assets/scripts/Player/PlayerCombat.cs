@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     float nextAttackTime = 0f;
     public float next_ultimateTime = 100;
     public float ultimateTime = 100;
+    public TimedSpeedBuff speedBuff;
     void Update()
     {
         if (Time.time >= nextAttackTime)
@@ -35,8 +36,10 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        //if (Input.GetButtonDown("Fire1"))
-            //BuffableEntity.AddBuff(SpeedBuff.InitializeBuff(this.gameObject));
+        if (Input.GetButtonDown("Fire1"))
+
+            GetComponent<BuffableEntity>().AddBuff(speedBuff);
+        //BuffableEntity.AddBuff(buff);
     }
     void Attack()
     {

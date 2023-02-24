@@ -18,18 +18,18 @@ public class SkellyAttack : MonoBehaviour
         Invoke("Attack", 0.5f);
     }*/
     //}
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("Hit");
-        if (Time.time >= nextAttackTime)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if (Time.time >= nextAttackTime)
             {
                 animator.SetTrigger("Attack");
                 //InvokeRepeating("OnTriggerEnter2D", .7f, 1f);//temp fix for continous attack
                 Attack();
-            }
             nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 
