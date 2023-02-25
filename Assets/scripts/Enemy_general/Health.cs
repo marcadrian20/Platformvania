@@ -12,48 +12,50 @@ public class Health : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
     private string ani_name;
+    private Vector3 position;
     public float deathspeed = 3f;
 
-    //public HealthBar HealthBar;
+    [Header("Potions")]
+    [SerializeField]
+    public List<GameObject> PotionSpawn = new List<GameObject>();
     void Start()
     {
         currentHealth = maxHealth;
         ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle anim
-        //HealthBar.SetMaxHealth(maxHealth);
 
     }
     public void TakeDamage(int damage)
     {
+        if (dead) return;
         currentHealth -= (Random.Range(-10, 10) + damage);
-        if (!dead) animator.SetTrigger("Hurt");
-        if (currentHealth <= 0)
+        animator.SetTrigger("Hurt");
+        if (currentHealth <= 0 && !dead)
         {
-            Die();
-            dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+            StartCoroutine(Die());
+            int itemIndex = Random.Range(0, PotionSpawn.Count), chance = Random.Range(0, 100);
+            if (chance >= 50)
+                Instantiate(PotionSpawn[itemIndex], position, Quaternion.identity);
         }
-        //Debug.Log("Text:" + ani_name);
-        //HealthBar.SetHealth(currentHealth);
     }
-    void Die()
+    private IEnumerator Die()
     {
+        position = transform.position;//death position  
+        dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+        GetComponent<SkellyAttack>().enabled = false;
+        GetComponent<EnemyAI_Skelly>().enabled = false;
         animator.SetBool("IsDead", true);
-        Invoke("Dissapear", deathspeed);//disable enemy
-    }
-    void Dissapear()
-    {
+        yield return new WaitForSecondsRealtime(deathspeed);
         gameObject.SetActive(false);// skelly for some fucking reason loves to snipe attack you beyond the grave
-        //Destroy(gameObject);///so destroy works for now ig
+        yield return new WaitForSecondsRealtime(0.5f);
     }
     public void Respawn()
     {
         dead = false;
-        //AddHealth(maxHealth);
         currentHealth = maxHealth;
         animator.ResetTrigger("IsDead");
         animator.Play(ani_name);
-        //Activate all attached component classes
         foreach (Behaviour component in components)
-            component.enabled = true;
+            component.enabled = true;//Activate all attached component classes
 
     }
 }

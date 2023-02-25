@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8436409454390566161
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +273,12 @@ MonoBehaviour:
   dead: 0
   components: []
   deathspeed: 3
+  PotionSpawn:
+  - {fileID: 7994086894505612103, guid: e7c9e920d449c6747a11626873efb1d3, type: 3}
+  - {fileID: 21307081605105711, guid: b4976db901d1ea74dbed4cc7b388c196, type: 3}
+  - {fileID: 4214732478745820057, guid: d3a3e8b784b6eb544bb79df5486f1469, type: 3}
+  - {fileID: 3413757244153161766, guid: 3a5fb1800d0d865429f001d8ed3380a2, type: 3}
+  - {fileID: 1914009455098807670, guid: 97927c670fe0fe44bab5aee0f6adc09d, type: 3}
 --- !u!61 &8436409454390566166
 BoxCollider2D:
   m_ObjectHideFlags: 0

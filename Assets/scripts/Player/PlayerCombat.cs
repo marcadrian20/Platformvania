@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ScriptableObjects;
 public class PlayerCombat : MonoBehaviour
 {
     public Animator animator;
@@ -15,7 +15,9 @@ public class PlayerCombat : MonoBehaviour
     float nextAttackTime = 0f;
     public float next_ultimateTime = 100;
     public float ultimateTime = 100;
-    public TimedSpeedBuff speedBuff;
+    //[Header("Buff")]
+    //public PoisonDebuff poisonDebuff;
+
     void Update()
     {
         if (Time.time >= nextAttackTime)
@@ -36,16 +38,15 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        if (Input.GetButtonDown("Fire1"))
+        //if (Input.GetButtonDown("Cancel"))
 
-            GetComponent<BuffableEntity>().AddBuff(speedBuff);
-        //BuffableEntity.AddBuff(buff);
+            //GetComponent<BuffableEntity>().AddBuff(poisonDebuff.InitializeBuff(this.gameObject));
     }
     void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, enemylayers);
         //Damage em
-        ultimateTime += Random.Range(0, 10);//stupid solution,works but if you spam attack it still raises.
+        ultimateTime += Random.Range(0, 15);//stupid solution,works but if you spam attack it still raises.
         //shhh feature for speedrunners not bug
         ultimateBar.UpdateUltimateBar();
         foreach (Collider2D enemy in hitEnemies)

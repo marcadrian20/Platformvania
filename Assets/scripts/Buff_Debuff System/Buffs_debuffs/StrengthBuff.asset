@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281871ab1cbe0d54ca1fe9b71ec4bda1, type: 3}
-  m_Name: speedBuff
+  m_Script: {fileID: 11500000, guid: 8f1c08c7e2f68d74286507982e506a16, type: 3}
+  m_Name: StrengthBuff
   m_EditorClassIdentifier: 
-  Duration: 5
+  Duration: 2
   IsDurationStacked: 1
-  IsEffectStacked: 0
-  SpeedIncrease: 60
+  IsEffectStacked: 1
+  StrengthIncrease: 30

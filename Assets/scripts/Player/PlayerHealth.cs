@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public Animator animator;
     public int maxHealth = 100;
-    int currentHealth;
+    [HideInInspector] public int currentHealth;
     public delegate void DeadAction();
     public static event DeadAction onDeath;
     public bool dead = false;
