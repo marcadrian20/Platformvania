@@ -45,10 +45,10 @@ GameObject:
   - component: {fileID: 6225024165196784767}
   - component: {fileID: 6225024165196784766}
   - component: {fileID: 6225024165196784761}
-  - component: {fileID: 6225024165196784763}
   - component: {fileID: 6225024165196784762}
-  - component: {fileID: 4245020356015543817}
   - component: {fileID: 3296714835277983871}
+  - component: {fileID: 1346852523}
+  - component: {fileID: 769413683495750966}
   m_Layer: 9
   m_Name: Bird 2
   m_TagString: Untagged
@@ -134,7 +134,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.016235352, y: -0.01623553}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -145,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.5}
+  m_Size: {x: 0.6974106, y: 0.5974132}
   m_EdgeRadius: 0
 --- !u!95 &6225024165196784766
 Animator:
@@ -219,29 +219,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6225024165196784763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6225024165196784756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2908997e7666dc4d811878c543be326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6225024165196784766}
-  maxHealth: 100
-  dead: 0
-  components: []
-  deathspeed: 3
-  PotionSpawn:
-  - {fileID: 7994086894505612103, guid: e7c9e920d449c6747a11626873efb1d3, type: 3}
-  - {fileID: 4214732478745820057, guid: d3a3e8b784b6eb544bb79df5486f1469, type: 3}
-  - {fileID: 3413757244153161766, guid: 3a5fb1800d0d865429f001d8ed3380a2, type: 3}
-  - {fileID: 21307081605105711, guid: b4976db901d1ea74dbed4cc7b388c196, type: 3}
-  - {fileID: 1914009455098807670, guid: 97927c670fe0fe44bab5aee0f6adc09d, type: 3}
 --- !u!61 &6225024165196784762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -268,23 +245,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &4245020356015543817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6225024165196784756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6688b45682862446a1c2296332d905f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  SkellyGFX: {fileID: 6225024165196784739}
-  animator: {fileID: 6225024165196784766}
-  speed: 400
-  nextWaypointDistance: 1
 --- !u!114 &3296714835277983871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +265,43 @@ MonoBehaviour:
     m_Bits: 256
   attackDamage: 40
   attackRate: 1
+--- !u!114 &1346852523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225024165196784756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440fdc469b5f274ea77a0d43761e5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  SkellyGFX: {fileID: 6225024165196784739}
+  animator: {fileID: 6225024165196784766}
+  speed: 400
+  nextWaypointDistance: 1
+--- !u!114 &769413683495750966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225024165196784756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2908997e7666dc4d811878c543be326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6225024165196784766}
+  maxHealth: 50
+  dead: 0
+  components: []
+  deathspeed: 3
+  PotionSpawn:
+  - {fileID: 1914009455098807670, guid: 97927c670fe0fe44bab5aee0f6adc09d, type: 3}
+  - {fileID: 3413757244153161766, guid: 3a5fb1800d0d865429f001d8ed3380a2, type: 3}
+  - {fileID: 4214732478745820057, guid: d3a3e8b784b6eb544bb79df5486f1469, type: 3}
+  - {fileID: 7994086894505612103, guid: e7c9e920d449c6747a11626873efb1d3, type: 3}
+  - {fileID: 21307081605105711, guid: b4976db901d1ea74dbed4cc7b388c196, type: 3}

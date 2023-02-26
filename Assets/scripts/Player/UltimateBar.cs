@@ -6,6 +6,6 @@ public class UltimateBar : MonoBehaviour
     public PlayerCombat player;
     public void UpdateUltimateBar()
     {
-        ultimateBarImage.fillAmount = Mathf.Clamp(player.ultimateTime / player.next_ultimateTime, 0, 1f);
+        ultimateBarImage.fillAmount = Mathf.Clamp((float)player.ultimateTime / (float)player.next_ultimateTime, 0, 1f);
     }
 }

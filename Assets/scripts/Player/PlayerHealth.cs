@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public delegate void DeadAction();
     public static event DeadAction onDeath;
     public bool dead = false;
+    public float iframe = 1.5f;
     public float deathspeed = 3f;
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
@@ -29,19 +30,16 @@ public class PlayerHealth : MonoBehaviour
     {
         if (invulnerable) return;
         currentHealth -= (Random.Range(-10, 10) + damage);
-        if (!dead)
-        {
-            StartCoroutine(Invunerability());
-            animator.SetTrigger("Hurt");
-        }
+        HealthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
-            dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
-            foreach (Behaviour component in components)
-                component.enabled = false;
         }
-        HealthBar.SetHealth(currentHealth);
+        else if (!dead)
+        {
+            StartCoroutine(Invunerability(iframe));
+            animator.SetTrigger("Hurt");
+        }
     }
     public void AddHealth(int _value)
     {
@@ -56,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
         animator.ResetTrigger("IsDead");
         HealthBar.SetHealth(currentHealth);
         animator.Play("Player_idle");
-        StartCoroutine(Invunerability());
+        StartCoroutine(Invunerability(iframe));
 
         //Activate all attached component classes
         foreach (Behaviour component in components)
@@ -64,7 +62,10 @@ public class PlayerHealth : MonoBehaviour
     }
     void Die()
     {
-        GetComponent<CharacterController2D>().enabled = false; //never do this its plain stupid im retarded
+        dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+        foreach (Behaviour component in components)
+            component.enabled = false;
+        GetComponent<CharacterController2D>().enabled = false;
         animator.SetBool("IsDead", true);
         onDeath();
         //Invoke("Dissapear", deathspeed);//disable enemy
@@ -73,11 +74,11 @@ public class PlayerHealth : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    private IEnumerator Invunerability()
+    public IEnumerator Invunerability(float invtime)
     {
         invulnerable = true;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(invtime);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         invulnerable = false;
     }

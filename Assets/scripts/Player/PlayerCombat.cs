@@ -13,11 +13,18 @@ public class PlayerCombat : MonoBehaviour
     public int ultimateDamage = 100;
     public float attackRate = 3f;
     float nextAttackTime = 0f;
-    public float next_ultimateTime = 100;
-    public float ultimateTime = 100;
+    public int next_ultimateTime = 100;
+    public int ultimateTime = 1;
+    public delegate void UltAction();
+    public static event UltAction onUltReady;
+    private bool CheckedForUlt = false;
     //[Header("Buff")]
     //public PoisonDebuff poisonDebuff;
 
+    void Awake()
+    {
+        ultimateBar.UpdateUltimateBar();
+    }
     void Update()
     {
         if (Time.time >= nextAttackTime)
@@ -38,9 +45,6 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        //if (Input.GetButtonDown("Cancel"))
-
-            //GetComponent<BuffableEntity>().AddBuff(poisonDebuff.InitializeBuff(this.gameObject));
     }
     void Attack()
     {
@@ -49,14 +53,26 @@ public class PlayerCombat : MonoBehaviour
         ultimateTime += Random.Range(0, 15);//stupid solution,works but if you spam attack it still raises.
         //shhh feature for speedrunners not bug
         ultimateBar.UpdateUltimateBar();
+        //StartCoroutine(GetComponent<PlayerHealth>().Invunerability(.8f));
+        UltimateReady();
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Health>().TakeDamage(attackDamage);
         }
 
     }
+    void UltimateReady()
+    {
+        if (ultimateTime >= next_ultimateTime && !CheckedForUlt)
+        {
+            CheckedForUlt = true;
+            onUltReady();
+        }
+
+    }
     void Ultimate()
     {
+        CheckedForUlt = false;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, enemylayers);
         foreach (Collider2D enemy in hitEnemies)
         {
