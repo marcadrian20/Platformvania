@@ -3,9 +3,12 @@ using UnityEngine.UI;
 public class UltimateBar : MonoBehaviour
 {
     public Image ultimateBarImage;
+    public GameObject UltimateIcon;
     public PlayerCombat player;
     public void UpdateUltimateBar()
     {
         ultimateBarImage.fillAmount = Mathf.Clamp((float)player.ultimateTime / (float)player.next_ultimateTime, 0, 1f);
+        if (player.ultimateTime == 0)
+            UltimateIcon.SetActive(false);
     }
 }

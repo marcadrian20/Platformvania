@@ -5,15 +5,20 @@ public class TimedBerserkBuff : TimedBuff
 {
     private readonly PlayerCombat playerCombat;
     private readonly PlayerHealth playerHealth;
+    private readonly EffectsUI effectsUI;
+    private GameObject UIObject;
     public TimedBerserkBuff(ScriptableBuff buff, GameObject obj) : base(buff, obj)
     {
         //Getting MovementComponent, replace with your own implementation
         playerCombat = obj.GetComponent<PlayerCombat>();
         playerHealth = obj.GetComponent<PlayerHealth>();
+        UIObject = GameObject.Find("/UI/StatsUI/Buffs_DebuffsUI");
+        effectsUI = UIObject.GetComponent<EffectsUI>();
     }
 
     protected override void ApplyEffect()
     {
+        effectsUI.ActivateBuff(4);
         BerserkBuff berserkBuff = (BerserkBuff)Buff;
         int temp = berserkBuff.StatsIncrease;
         playerCombat.ultimateDamage += berserkBuff.StatsIncrease;
@@ -28,6 +33,7 @@ public class TimedBerserkBuff : TimedBuff
 
     public override void End()
     {
+        effectsUI.DeactivateBuff(4);
         BerserkBuff berserkBuff = (BerserkBuff)Buff;
         playerCombat.ultimateDamage -= berserkBuff.StatsIncrease * EffectStacks;
         playerCombat.attackDamage -= berserkBuff.StatsIncrease * EffectStacks;

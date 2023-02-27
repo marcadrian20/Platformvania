@@ -38,8 +38,8 @@ public class GameOver : MonoBehaviour
 
     public void Restart()
     {
-        playerRespawn.Respawn();
         Resume();
+        playerRespawn.Respawn();
     }
     public void LoadMenu()
     {

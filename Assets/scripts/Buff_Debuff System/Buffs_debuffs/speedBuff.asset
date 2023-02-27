@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281871ab1cbe0d54ca1fe9b71ec4bda1, type: 3}
   m_Name: speedBuff
   m_EditorClassIdentifier: 
-  Duration: 2
+  Duration: 4
   IsDurationStacked: 1
   IsEffectStacked: 1
   SpeedIncrease: 15

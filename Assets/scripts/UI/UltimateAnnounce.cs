@@ -4,6 +4,7 @@ using UnityEngine;
 public class UltimateAnnounce : MonoBehaviour
 {
     public GameObject UltimateUI;
+    public GameObject UltimateIcon;
     void OnEnable()
     {
         PlayerCombat.onUltReady += ShowUI;
@@ -20,6 +21,7 @@ public class UltimateAnnounce : MonoBehaviour
     private IEnumerator Show()
     {
         UltimateUI.SetActive(true);
+        UltimateIcon.SetActive(true);
         //SoundManager.instance.PlaySound(checkpoint);
         yield return new WaitForSeconds(1f);//time for text on screen
         UltimateUI.SetActive(false);

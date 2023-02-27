@@ -265,6 +265,8 @@ MonoBehaviour:
     m_Bits: 256
   attackDamage: 40
   attackRate: 1
+  DebuffSpawn:
+  - {fileID: 11400000, guid: 08a9e5413efb2bf4484f975a81c4fe82, type: 2}
 --- !u!114 &1346852523
 MonoBehaviour:
   m_ObjectHideFlags: 0

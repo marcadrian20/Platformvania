@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281871ab1cbe0d54ca1fe9b71ec4bda1, type: 3}
-  m_Name: SpeedIncreaseHuge
+  m_Script: {fileID: 11500000, guid: d9195e2f8e48bbc49a7dec1ef857dc08, type: 3}
+  m_Name: Blindness
   m_EditorClassIdentifier: 
-  Duration: 4
-  IsDurationStacked: 0
-  IsEffectStacked: 1
-  SpeedIncrease: 30
+  Duration: 3
+  IsDurationStacked: 1
+  IsEffectStacked: 0

@@ -4,16 +4,18 @@ using UnityEngine;
 public class TimedStrengthBuff : TimedBuff
 {
     private readonly PlayerCombat playerCombat;
-
+    private readonly EffectsUI effectsUI;
+    private GameObject UIObject;
     public TimedStrengthBuff(ScriptableBuff buff, GameObject obj) : base(buff, obj)
     {
-        //Getting MovementComponent, replace with your own implementation
         playerCombat = obj.GetComponent<PlayerCombat>();
+        UIObject = GameObject.Find("/UI/StatsUI/Buffs_DebuffsUI");
+        effectsUI = UIObject.GetComponent<EffectsUI>();
     }
 
     protected override void ApplyEffect()
     {
-        //Add speed increase to MovementComponent
+        effectsUI.ActivateBuff(0);
         StrengthBuff strengthBuff = (StrengthBuff)Buff;
         playerCombat.ultimateDamage += strengthBuff.StrengthIncrease;
         playerCombat.attackDamage += strengthBuff.StrengthIncrease;
@@ -21,7 +23,7 @@ public class TimedStrengthBuff : TimedBuff
 
     public override void End()
     {
-        //Revert speed increase
+        effectsUI.DeactivateBuff(0);
         StrengthBuff strengthBuff = (StrengthBuff)Buff;
         playerCombat.ultimateDamage -= strengthBuff.StrengthIncrease * EffectStacks;
         playerCombat.attackDamage -= strengthBuff.StrengthIncrease * EffectStacks;

@@ -7,8 +7,8 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     public UltimateBar ultimateBar;
     public Transform attackpoint;
-    public float attackRange = 0.5f;
     public LayerMask enemylayers;
+    public float attackRange = 0.5f;
     public int attackDamage = 40;
     public int ultimateDamage = 100;
     public float attackRate = 3f;
@@ -18,8 +18,6 @@ public class PlayerCombat : MonoBehaviour
     public delegate void UltAction();
     public static event UltAction onUltReady;
     private bool CheckedForUlt = false;
-    //[Header("Buff")]
-    //public PoisonDebuff poisonDebuff;
 
     void Awake()
     {
@@ -53,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
         ultimateTime += Random.Range(0, 15);//stupid solution,works but if you spam attack it still raises.
         //shhh feature for speedrunners not bug
         ultimateBar.UpdateUltimateBar();
-        //StartCoroutine(GetComponent<PlayerHealth>().Invunerability(.8f));
+        StartCoroutine(GetComponent<PlayerHealth>().Invunerability(.8f));
         UltimateReady();
         foreach (Collider2D enemy in hitEnemies)
         {

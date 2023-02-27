@@ -63,7 +63,7 @@ MonoBehaviour:
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 2
+  m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 572
     height: 665
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -200,9 +200,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7878ffff
-      m_LastClickedID: -34696
-      m_ExpandedIDs: b287ffff10fbffff0e6400003664000078640000a8640000d4640000
+      m_SelectedIDs: 62e8feff
+      m_LastClickedID: -71582
+      m_ExpandedIDs: eee8feff1c03ffff1440ffffc486ffff10fbffff0e6400003664000078640000a8640000d4640000d41001003e11010068110100a2110100865c0100f45c01002e5d0100825d0100a05d0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -533,9 +533,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 721.58734, y: 669.5142, z: -4.7153397}
+    m_Target: {x: 1626.4364, y: 806.9413, z: -2.7004123}
     speed: 2
-    m_Value: {x: 732.2607, y: 677.6026, z: -4.9730005}
+    m_Value: {x: 1626.4364, y: 806.9413, z: -2.7004123}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -586,9 +586,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 546.8135
+    m_Target: 294.80203
     speed: 2
-    m_Value: 572.5795
+    m_Value: 294.80203
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -632,8 +632,8 @@ MonoBehaviour:
     y: 0
     width: 450
     height: 665
-  m_MinSize: {x: 276, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 9}
   m_Panes:
   - {fileID: 9}
@@ -747,22 +747,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Other textures and stuff/Shikashi's Fantasy Icons Pack v2
+    - Assets/scripts/Buff_Debuff System/Buffs_debuffs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 53
   m_LastFolders:
-  - Assets/Other textures and stuff/Shikashi's Fantasy Icons Pack v2
+  - Assets/scripts/Buff_Debuff System/Buffs_debuffs
   m_LastFoldersGridSize: 53
   m_LastProjectPath: D:\proiecte\github\Platformvania
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 89}
-    m_SelectedIDs: cc830000
-    m_LastClickedID: 33740
-    m_ExpandedIDs: 00000000686900007869000000ca9a3b
+    scrollPos: {x: 0, y: 165}
+    m_SelectedIDs: 32840000
+    m_LastClickedID: 33842
+    m_ExpandedIDs: 00000000686900007a6900007e6900004e730000b88e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -815,8 +815,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7878ffff
-    m_LastClickedInstanceID: -34696
+    m_SelectedInstanceIDs: 62e8feff
+    m_LastClickedInstanceID: -71582
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: bac3000082660000
     m_RenameOverlay:
@@ -842,7 +842,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 300}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 53
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 161

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ScriptableObjects;
 
 public class SkellyAttack : MonoBehaviour
 {
@@ -10,29 +11,30 @@ public class SkellyAttack : MonoBehaviour
     public LayerMask PlayerLayer;
     public int attackDamage = 40;
     public float attackRate = 3f;
+    [Header("Debuffs")]
+    [SerializeField]
+    public List<ScriptableBuff> DebuffSpawn = new List<ScriptableBuff>();
     float nextAttackTime = 0f;
-    //void Update()
-    //{
-    /*if (Input.GetButtonDown("Fire1"))
-    {
-        Invoke("Attack", 0.5f);
-    }*/
-    //}
     void OnTriggerStay2D(Collider2D collision)
     {
-        //Debug.Log("Hit");
         if (collision.gameObject.CompareTag("Player"))
         {
             if (Time.time >= nextAttackTime)
             {
                 animator.SetTrigger("Attack");
-                //InvokeRepeating("OnTriggerEnter2D", .7f, 1f);//temp fix for continous attack
                 Attack();
-            nextAttackTime = Time.time + 1f / attackRate;
+                Debuff(collision.gameObject);
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
-
+    void Debuff(GameObject target)
+    {
+        int DebuffChance = Random.Range(0, 100);
+        int itemIndex = Random.Range(0, DebuffSpawn.Count);
+        if (DebuffChance >= 75)
+            target.GetComponent<BuffableEntity>().AddBuff(DebuffSpawn[itemIndex].InitializeBuff(target));
+    }
 
     void Attack()
     {
