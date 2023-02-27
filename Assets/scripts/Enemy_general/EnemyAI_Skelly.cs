@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
+using Pathfinding;///we use the A* pathfinding algorithm in order to calculate the path and velocity 
 
 public class EnemyAI_Skelly : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class EnemyAI_Skelly : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0.5f, 0.5f);//might modify later
+        InvokeRepeating("UpdatePath", 0.5f, 0.5f);//We have to keep polling the UpdatePath so we can always track the player
     }
     void UpdatePath()
     {
@@ -28,7 +28,7 @@ public class EnemyAI_Skelly : MonoBehaviour
         seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
 
-    void OnPathComplete(Path p)
+    void OnPathComplete(Path p)//We check for completion and handle errors 
     {
         if (!p.error)
         {
@@ -36,7 +36,7 @@ public class EnemyAI_Skelly : MonoBehaviour
             currentWaypoint = 0;
         }
     }
-    void RandomAnimationGo()
+    void RandomAnimationGo()//Plays the "Move" animation
     {
         animator.SetBool("IsMoving", true);
     }
@@ -50,20 +50,16 @@ public class EnemyAI_Skelly : MonoBehaviour
             return;
         }
         else reachedEndOfPath = false;
-
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * speed * Time.deltaTime;     ///////We move the enemy towards the player after calculating the distance,force and direction to move in
 
         rb.AddForce(force);
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-        //var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distance / nextWaypointDistance) : 1f; //dont question me dunno why or how it works
-        //found this thing in the documentation and it looked fancy,its hit or miss
-
         if (distance < nextWaypointDistance)
         {
-            currentWaypoint++;
+            currentWaypoint++;//we check for completion and increment if not close to the waypoint
         }
-        if (rb.velocity.x >= 0.01f && force.x > 0f)
+        if (rb.velocity.x >= 0.01f && force.x > 0f)//we handle the direction and we flip the sprite as needed
         {
             SkellyGFX.localScale = new Vector3(1f, 1f, 1f);
             RandomAnimationGo();

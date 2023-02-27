@@ -24,7 +24,7 @@ public class TimedBlindnessDebuff : TimedBuff
 
     public override void End()
     {
-        effectsUI.ActivateBuff(3);
+        effectsUI.DeactivateBuff(3);
         BlindnessUI.SetActive(false);
         EffectStacks = 0;
     }

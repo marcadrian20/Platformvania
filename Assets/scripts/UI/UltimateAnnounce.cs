@@ -8,21 +8,19 @@ public class UltimateAnnounce : MonoBehaviour
     void OnEnable()
     {
         PlayerCombat.onUltReady += ShowUI;
-    }
-
-    void OnDisable()
+    }                                           //We use ondisable and on enable to subscribe to an event
+    void OnDisable()                    //in this case the event tracks the Ultimate Skill and whenever it is ready  
     {
         PlayerCombat.onUltReady -= ShowUI;
-    }
-    public void ShowUI()
+    }                               
+    public void ShowUI()//workaround for coroutines
     {
         StartCoroutine(Show());
     }
-    private IEnumerator Show()
+    private IEnumerator Show()//used to handle the ui
     {
         UltimateUI.SetActive(true);
         UltimateIcon.SetActive(true);
-        //SoundManager.instance.PlaySound(checkpoint);
         yield return new WaitForSeconds(1f);//time for text on screen
         UltimateUI.SetActive(false);
     }

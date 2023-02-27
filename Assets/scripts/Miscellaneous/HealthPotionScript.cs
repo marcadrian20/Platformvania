@@ -11,12 +11,12 @@ public class HealthPotionScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))//on collision with the player
         {
-            Destroy(gameObject);
-            HealthValue = Random.Range(10, 35);
+            Destroy(gameObject);// we destroy the potion and apply the effects
+            HealthValue = Random.Range(10, 35);//we calculate a random value to add to the current health
             playerHealth = collision.GetComponent<PlayerHealth>();
-            playerHealth.AddHealth(HealthValue);
+            playerHealth.AddHealth(HealthValue);//we handle the addition command
         }
     }
 }

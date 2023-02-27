@@ -9,7 +9,7 @@ public class LavaDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(20);
+            playerHealth.TakeDamage(20);//Whenever the player falls/goes into lava we decrease his current health
         }
     }
 }

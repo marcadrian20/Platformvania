@@ -21,21 +21,25 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle anim
+        ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle animation
 
     }
     public void TakeDamage(int damage)
     {
-        if (dead) return;
-        currentHealth -= (Random.Range(-10, 10) + damage);
+        if (dead) return;//we check if the enemy is dead
+        currentHealth -= (Random.Range(-10, 10) + damage);// if not we apply a random value + a set value
         animator.SetTrigger("Hurt");
-        if (currentHealth <= 0 && !dead)
+        if (currentHealth <= 0 && !dead)//if we are dying we initiate the dying sequence
         {
             StartCoroutine(Die());
-            int itemIndex = Random.Range(0, PotionSpawn.Count), chance = Random.Range(0, 100);
-            if (chance >= 50)
-                Instantiate(PotionSpawn[itemIndex], position, Quaternion.identity);
+            PotionDrop();
         }
+    }
+    void PotionDrop()
+    {
+        int itemIndex = Random.Range(0, PotionSpawn.Count), chance = Random.Range(0, 100);//we poll a random number from the list with the position of the potion
+        if (chance >= 50)
+            Instantiate(PotionSpawn[itemIndex], position, Quaternion.identity);//and we spawn it besides the gameobject
     }
     private IEnumerator Die()
     {
@@ -47,16 +51,6 @@ public class Health : MonoBehaviour
         yield return new WaitForSecondsRealtime(deathspeed);
         gameObject.SetActive(false);// skelly for some fucking reason loves to snipe attack you beyond the grave
         yield return new WaitForSecondsRealtime(0.5f);
-    }
-    public void Respawn()
-    {
-        dead = false;
-        currentHealth = maxHealth;
-        animator.ResetTrigger("IsDead");
-        animator.Play(ani_name);
-        foreach (Behaviour component in components)
-            component.enabled = true;//Activate all attached component classes
-
     }
 }
 //->Mark was here @furculita_in_priza
