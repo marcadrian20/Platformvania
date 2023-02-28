@@ -9,7 +9,7 @@ public class SkellyAttack : MonoBehaviour
     public Transform attackpoint;
     public float attackRange = 0.5f;
     public LayerMask PlayerLayer;
-    public int attackDamage = 40;
+    public int attackDamage = 20;
     public float attackRate = 3f;
     [Header("Debuffs")]
     [SerializeField]
@@ -30,9 +30,9 @@ public class SkellyAttack : MonoBehaviour
     }
     void Debuff(GameObject target)//used to handle debuffs 
     {
-        int DebuffChance = Random.Range(0, 100);//calculates the chance to apply a debuff
+        int DebuffChance = Random.Range(0, 500);//calculates the chance to apply a debuff
         int itemIndex = Random.Range(0, DebuffSpawn.Count);///and then the position of the effect in the debuff list
-        if (DebuffChance >= 95)
+        if (DebuffChance >= 490)
             target.GetComponent<BuffableEntity>().AddBuff(DebuffSpawn[itemIndex].InitializeBuff(target));//We apply the effect on the target gameobject(usually the player)
     }
 

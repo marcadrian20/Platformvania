@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     [SerializeField] private Behaviour[] components;
     private string ani_name;
     private Vector3 position;
-    public float deathspeed = 3f;
+    public float deathspeed = 2f;
     private EnemyAI_Skelly enemyAI_Skelly;
     private Rigidbody2D rigidbody2D;
 
@@ -33,8 +33,8 @@ public class Health : MonoBehaviour
         if (dead) return;//we check if the enemy is dead
         currentHealth -= (Random.Range(-10, 10) + damage);// if not we apply a random value + a set value
         animator.SetTrigger("Hurt");
-        if (enemyAI_Skelly.facing_right) rigidbody2D.AddForce(new Vector2(-60f, 50f));
-        else rigidbody2D.AddForce(new Vector2(60f, 50f));
+        if (enemyAI_Skelly.facing_right) rigidbody2D.AddForce(new Vector2(-65f, 55f));
+        else rigidbody2D.AddForce(new Vector2(65f, 55f));
         if (currentHealth <= 0 && !dead)//if we are dying we initiate the dying sequence
         {
             StartCoroutine(Die());
@@ -44,7 +44,7 @@ public class Health : MonoBehaviour
     void PotionDrop()
     {
         int itemIndex = Random.Range(0, PotionSpawn.Count), chance = Random.Range(0, 100);//we poll a random number from the list with the position of the potion
-        if (chance >= 50)
+        if (chance >= 75)
             Instantiate(PotionSpawn[itemIndex], position, Quaternion.identity);//and we spawn it besides the gameobject
     }
     private IEnumerator Die()
