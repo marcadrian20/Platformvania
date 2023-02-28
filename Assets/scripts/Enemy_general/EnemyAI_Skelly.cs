@@ -14,7 +14,8 @@ public class EnemyAI_Skelly : MonoBehaviour
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
     private int currentWaypoint = 0;
-    bool reachedEndOfPath;// = false;
+    bool reachedEndOfPath;
+    public bool facing_right = false;
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -63,11 +64,13 @@ public class EnemyAI_Skelly : MonoBehaviour
         {
             SkellyGFX.localScale = new Vector3(1f, 1f, 1f);
             RandomAnimationGo();
+            facing_right = true;
         }
         else if (rb.velocity.x <= -0.01f && force.x < 0f)
         {
             SkellyGFX.localScale = new Vector3(-1f, 1f, 1f);
             RandomAnimationGo();
+            facing_right = false;
         }
     }
 }

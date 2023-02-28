@@ -32,12 +32,13 @@ public class SkellyAttack : MonoBehaviour
     {
         int DebuffChance = Random.Range(0, 100);//calculates the chance to apply a debuff
         int itemIndex = Random.Range(0, DebuffSpawn.Count);///and then the position of the effect in the debuff list
-        if (DebuffChance >= 85)
+        if (DebuffChance >= 95)
             target.GetComponent<BuffableEntity>().AddBuff(DebuffSpawn[itemIndex].InitializeBuff(target));//We apply the effect on the target gameobject(usually the player)
     }
 
     void Attack()
     {
+        if (GetComponent<Health>().dead) return;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, PlayerLayer);//we make a list with the enemies inside the attack range 
         foreach (Collider2D enemy in hitEnemies)
         {

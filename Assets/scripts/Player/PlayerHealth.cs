@@ -29,8 +29,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        if (invulnerable) return;
-
+        if (invulnerable || dead) return;
         if (characterController2D.m_FacingRight)
             rigidbody2D.AddForce(new Vector2(-200f, 100f));
         else rigidbody2D.AddForce(new Vector2(200f, 100f));
@@ -39,8 +38,7 @@ public class PlayerHealth : MonoBehaviour
         HealthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
-            animator.SetBool("IsDead", true);
-            Die();
+            StartCoroutine(Die());
         }
         else if (!dead)
         {
@@ -55,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Respawn()
     {
+        rigidbody2D.drag = 0f;
         dead = false;
         currentHealth = maxHealth;
         animator.ResetTrigger("IsDead");
@@ -62,14 +61,21 @@ public class PlayerHealth : MonoBehaviour
         animator.Play("Player_idle");
         StartCoroutine(Invunerability(iframe));
         //Activate all attached component classes
+        //GetComponent<CharacterController2D>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = true;
         foreach (Behaviour component in components)
             component.enabled = true;
     }
-    void Die()
+    public IEnumerator Die()
     {
-        GetComponent<CharacterController2D>().enabled = false;
-        onDeath();
+        rigidbody2D.drag = 10f;
         dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+        GetComponent<CharacterController2D>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = false;
+        animator.SetBool("IsDead", true);
+        animator.Play("Player_dead");
+        yield return new WaitForSecondsRealtime(1f);
+        onDeath();
         foreach (Behaviour component in components)
             component.enabled = false;
     }

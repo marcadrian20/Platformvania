@@ -14,12 +14,16 @@ public class Health : MonoBehaviour
     private string ani_name;
     private Vector3 position;
     public float deathspeed = 3f;
+    private EnemyAI_Skelly enemyAI_Skelly;
+    private Rigidbody2D rigidbody2D;
 
     [Header("Potions")]
     [SerializeField]
     public List<GameObject> PotionSpawn = new List<GameObject>();
     void Start()
     {
+        enemyAI_Skelly = GetComponent<EnemyAI_Skelly>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle animation
 
@@ -29,6 +33,8 @@ public class Health : MonoBehaviour
         if (dead) return;//we check if the enemy is dead
         currentHealth -= (Random.Range(-10, 10) + damage);// if not we apply a random value + a set value
         animator.SetTrigger("Hurt");
+        if (enemyAI_Skelly.facing_right) rigidbody2D.AddForce(new Vector2(-60f, 50f));
+        else rigidbody2D.AddForce(new Vector2(60f, 50f));
         if (currentHealth <= 0 && !dead)//if we are dying we initiate the dying sequence
         {
             StartCoroutine(Die());
