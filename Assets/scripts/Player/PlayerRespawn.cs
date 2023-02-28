@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class PlayerRespawn : MonoBehaviour
 {
     //[SerializeField] private AudioClip checkpoint;
-    private Transform currentCheckpoint;
+    public Transform currentCheckpoint;
     private PlayerHealth playerHealth;
   
 
@@ -18,18 +18,13 @@ public class PlayerRespawn : MonoBehaviour
     {
         playerHealth.Respawn(); //Restore player health and reset animation
         transform.position = currentCheckpoint.position; //Move player to checkpoint location
-        //Move the camera to the checkpoint's room
-        //Camera.main.GetComponent<CameraController>().MoveToNewRoom(currentCheckpoint.parent);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
-            currentCheckpoint = collision.transform;
-            //playerHealth.onDeath += Respawn;
-            //SoundManager.instance.PlaySound(checkpoint);
-            //collision.GetComponent<Collider2D>().enabled = false;
-            //            collision.GetComponent<Animator>().SetTrigger("activate");
+            currentCheckpoint = collision.transform;//on collision we save the current checkpoint
+            playerHealth.AddHealth(40);///as a reward we give the player health
         }
     }
 }

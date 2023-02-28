@@ -12,49 +12,51 @@ public class Health : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
     private string ani_name;
+    private Vector3 position;
     public float deathspeed = 3f;
+    private EnemyAI_Skelly enemyAI_Skelly;
+    private Rigidbody2D rigidbody2D;
 
-    //public HealthBar HealthBar;
+    [Header("Potions")]
+    [SerializeField]
+    public List<GameObject> PotionSpawn = new List<GameObject>();
     void Start()
     {
+        enemyAI_Skelly = GetComponent<EnemyAI_Skelly>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
-        ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle anim
-        //HealthBar.SetMaxHealth(maxHealth);
+        ani_name = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;//we save the name of idle animation
 
     }
     public void TakeDamage(int damage)
     {
-        currentHealth -= (Random.Range(-10, 10) + damage);
-        if (!dead) animator.SetTrigger("Hurt");
-        if (currentHealth <= 0)
+        if (dead) return;//we check if the enemy is dead
+        currentHealth -= (Random.Range(-10, 10) + damage);// if not we apply a random value + a set value
+        animator.SetTrigger("Hurt");
+        if (enemyAI_Skelly.facing_right) rigidbody2D.AddForce(new Vector2(-60f, 50f));
+        else rigidbody2D.AddForce(new Vector2(60f, 50f));
+        if (currentHealth <= 0 && !dead)//if we are dying we initiate the dying sequence
         {
-            Die();
-            dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+            StartCoroutine(Die());
+            PotionDrop();
         }
-        //Debug.Log("Text:" + ani_name);
-        //HealthBar.SetHealth(currentHealth);
     }
-    void Die()
+    void PotionDrop()
     {
+        int itemIndex = Random.Range(0, PotionSpawn.Count), chance = Random.Range(0, 100);//we poll a random number from the list with the position of the potion
+        if (chance >= 50)
+            Instantiate(PotionSpawn[itemIndex], position, Quaternion.identity);//and we spawn it besides the gameobject
+    }
+    private IEnumerator Die()
+    {
+        position = transform.position;//death position  
+        dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+        GetComponent<SkellyAttack>().enabled = false;
+        GetComponent<EnemyAI_Skelly>().enabled = false;
         animator.SetBool("IsDead", true);
-        Invoke("Dissapear", deathspeed);//disable enemy
-    }
-    void Dissapear()
-    {
+        yield return new WaitForSecondsRealtime(deathspeed);
         gameObject.SetActive(false);// skelly for some fucking reason loves to snipe attack you beyond the grave
-        //Destroy(gameObject);///so destroy works for now ig
-    }
-    public void Respawn()
-    {
-        dead = false;
-        //AddHealth(maxHealth);
-        currentHealth = maxHealth;
-        animator.ResetTrigger("IsDead");
-        animator.Play(ani_name);
-        //Activate all attached component classes
-        foreach (Behaviour component in components)
-            component.enabled = true;
-
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 }
 //->Mark was here @furculita_in_priza

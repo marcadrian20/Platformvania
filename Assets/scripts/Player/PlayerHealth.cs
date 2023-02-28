@@ -6,42 +6,45 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     public Animator animator;
+    public HealthBar HealthBar;
+    private CharacterController2D characterController2D;
+    private Rigidbody2D rigidbody2D;
     public int maxHealth = 100;
-    int currentHealth;
+    public float iframe = 1.5f;
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+    [HideInInspector] public int currentHealth;
     public delegate void DeadAction();
     public static event DeadAction onDeath;
     public bool dead = false;
-    public float deathspeed = 3f;
-    [Header("Components")]
-    [SerializeField] private Behaviour[] components;
-    private bool invulnerable;
-    public HealthBar HealthBar;
-
-
+    private bool invulnerable = false;
 
     void Start()
     {
+        characterController2D = GetComponent<CharacterController2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         HealthBar.SetMaxHealth(maxHealth);
 
     }
     public void TakeDamage(int damage)
     {
-        //if (invulnerable) return;
+        if (invulnerable || dead) return;
+        if (characterController2D.m_FacingRight)
+            rigidbody2D.AddForce(new Vector2(-200f, 100f));
+        else rigidbody2D.AddForce(new Vector2(200f, 100f));
+
         currentHealth -= (Random.Range(-10, 10) + damage);
-        if (!dead)
-        {
-            //StartCoroutine(Invunerability());
-            animator.SetTrigger("Hurt");
-        }
+        HealthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
-            Die();
-            dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
-            foreach (Behaviour component in components)
-                component.enabled = false;
+            StartCoroutine(Die());
         }
-        HealthBar.SetHealth(currentHealth);
+        else if (!dead)
+        {
+            StartCoroutine(Invunerability(iframe));
+            animator.SetTrigger("Hurt");
+        }
     }
     public void AddHealth(int _value)
     {
@@ -50,41 +53,45 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Respawn()
     {
+        rigidbody2D.drag = 0f;
         dead = false;
-        //AddHealth(maxHealth);
         currentHealth = maxHealth;
         animator.ResetTrigger("IsDead");
         HealthBar.SetHealth(currentHealth);
         animator.Play("Player_idle");
-        //StartCoroutine(Invunerability());
-
+        StartCoroutine(Invunerability(iframe));
         //Activate all attached component classes
+        //GetComponent<CharacterController2D>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = true;
         foreach (Behaviour component in components)
             component.enabled = true;
     }
-    void Die()
+    public IEnumerator Die()
     {
+        rigidbody2D.drag = 10f;
+        dead = true;//checking if dead or else its gonna loop the hurt animation when you hit despite the entity being dead
+        GetComponent<CharacterController2D>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = false;
         animator.SetBool("IsDead", true);
+        animator.Play("Player_dead");
+        yield return new WaitForSecondsRealtime(1f);
         onDeath();
-        GetComponent <CharacterController2D>().enabled = false; //never do this its plain stupid im retarded
-        //Invoke("Dissapear", deathspeed);//disable enemy
+        foreach (Behaviour component in components)
+            component.enabled = false;
     }
-    void Dissapear()
-    {
-        gameObject.SetActive(false);
-    }
-    /*private IEnumerator Invunerability()
+
+    public IEnumerator Invunerability(float invtime)
     {
         invulnerable = true;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+        yield return new WaitForSecondsRealtime(invtime);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         invulnerable = false;
-    }*/
+    }
     void Update()
     {
         if (Input.GetButtonDown("Crouch"))
-            TakeDamage(40);
+            Die();
     }
 }//edited,dont ask
  //->Mark was here @furculita_in_priza
