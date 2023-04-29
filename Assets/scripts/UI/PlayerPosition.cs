@@ -15,6 +15,11 @@ public class PlayerPosition : MonoBehaviour
             ModifyText();
             StartCoroutine(TextShow());
         }
+        if (collision.gameObject.CompareTag("Position"))
+        {
+            positionText.text = collision.transform.name;
+            StartCoroutine(TextShow());
+        }
     }
     private IEnumerator TextShow()
     {
