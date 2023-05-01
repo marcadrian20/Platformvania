@@ -18,6 +18,7 @@ public class PlayerCombat : MonoBehaviour
     public delegate void UltAction();
     public static event UltAction onUltReady;
     private bool CheckedForUlt = false;
+    bool Attacking = false, Ultimating = false;
 
     void Awake()
     {
@@ -27,24 +28,25 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Attacking)
             {
-
                 animator.SetTrigger("Attack");
                 Invoke("Attack", 0.5f);
                 nextAttackTime = Time.time + 1f / attackRate;
+                Attacking = false;
             }
-            if (Input.GetButtonDown("Fire2") && ultimateTime >= next_ultimateTime)
+            else if (Ultimating && ultimateTime >= next_ultimateTime)
             {
                 animator.SetTrigger("UltAtk");
                 ultimateTime = 0;
                 Invoke("Ultimate", 0.5f);
                 ultimateBar.UpdateUltimateBar();
                 nextAttackTime = Time.time + 1f / attackRate;
+                Ultimating = false;
             }
         }
     }
-    void Attack()
+    public void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, enemylayers);
         //Damage em
@@ -67,6 +69,14 @@ public class PlayerCombat : MonoBehaviour
             onUltReady();
         }
 
+    }
+    public void ultUI()
+    {
+        Ultimating = true;
+    }
+    public void atkUI()
+    {
+        Attacking = true;
     }
     void Ultimate()
     {

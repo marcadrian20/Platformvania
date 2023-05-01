@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
-    void Pause()//the pause function 
+    public void Pause()//the pause function 
     {
         pauseMenuUI.SetActive(true);///works by activating an already existing UI element 
         Time.timeScale = 0.1f;//and either freezing the game's speed or just lowering it, depends on the desired effect; 
