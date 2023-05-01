@@ -123103,8 +123103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c323be5604309d47a3bbca97a70dd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UltimateUI: {fileID: 4140655532789119797}
-  UltimateIcon: {fileID: 3117067149735971647}
+  UltimateUI: {fileID: 3117067150244656898}
+  UltimateIcon: {fileID: 3117067149817184520}
 --- !u!224 &4140655532778687802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -123263,7 +123263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ultimateBarImage: {fileID: 4140655532865426384}
-  UltimateIcon: {fileID: 0}
+  UltimateIcon: {fileID: 3117067149817184520}
   player: {fileID: 1612636176}
 --- !u!224 &4140655532789119796
 RectTransform:
