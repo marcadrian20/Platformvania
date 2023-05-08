@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
-public class UltimateBar : MonoBehaviour
+public class UltimateBar : NetworkBehaviour
 {
     public Image ultimateBarImage;
     public GameObject UltimateIcon;

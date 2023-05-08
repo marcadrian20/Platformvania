@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.Events;
-public class PlayerRespawn : MonoBehaviour
+public class PlayerRespawn : NetworkBehaviour
 {
     //[SerializeField] private AudioClip checkpoint;
     public Transform currentCheckpoint;
     private PlayerHealth playerHealth;
-  
+    public GameObject player;
 
     private void Awake()
     {
-        playerHealth = GetComponent<PlayerHealth>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     public void Respawn()
